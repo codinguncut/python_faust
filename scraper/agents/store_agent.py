@@ -1,4 +1,4 @@
-import logging
+import logging  # noqa
 
 import faust
 from ..common import app

@@ -1,4 +1,4 @@
-import logging
+import logging  # noqa
 
 from ..common import app
 from ..models import Tweet, twitter_topic

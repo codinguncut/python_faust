@@ -8,14 +8,11 @@ from ..nlp.entities import init, entities
 
 @app.agent(content_topic,
            sink=[result_topic],
-           concurrency=2)
+           concurrency=4)
 async def nlp_agent(contents: faust.Stream[Content]) -> None:
-    logging.warning('before nlp init')
     nlp = init()
-    logging.warning('after nlp init')
     async for content in contents:
         text = content.text
-        # logging.warning('got nlp %r %r', content, text)
         ents = entities(nlp, text)
         yield Result(
             text=text,
