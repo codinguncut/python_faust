@@ -1,0 +1,9 @@
+flake8
+# jupyterlab
+# kafka-tools
+pip-tools
+pytest
+pytest-cov
+pytest-pythonpath
+pytest-runner
+pytest-asyncio

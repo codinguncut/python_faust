@@ -1,0 +1,13 @@
+py  # pytest
+atomicwrites  # for faust?
+cython  # for spacy, msgpack?
+aiocontextvars  # for faust on py3.6
+# python-rocksdb
+faust[fast]
+python-dotenv
+spacy
+vaderSentiment
+msgpack
+twitter
+emoji
+tqdm

@@ -1,0 +1,35 @@
+version: '2'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    # volumes:
+    # - ./data/zookeeper:/opt/zookeeper-3.4.9/data
+    container_name: zookeeper
+  kafka:
+    image: wurstmeister/kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    container_name: kafka
+    environment:
+      # alternatively use fixed IP, or network_mode: host
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.1.202
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # - ./data/kafka:/var/lib/kafka/data
+  manager:
+    image: sheepkiller/kafka-manager
+    depends_on:
+      - zookeeper
+      - kafka
+    ports:
+      - "9000:9000"
+    environment:
+      ZK_HOSTS: zookeeper:2181
+      APPLICATION_SECRET: letmein
+      KM_ARGS: -Djava.net.preferIPv4Stack=true
