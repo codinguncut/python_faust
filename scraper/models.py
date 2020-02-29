@@ -10,7 +10,7 @@ class Content(faust.Record):
     text: str
 
 
-class Result(faust.Record):
+class Result(faust.Record, serializer='json'):
     text: str
     entities: str
     # sentiment: float

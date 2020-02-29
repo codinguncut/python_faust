@@ -1,4 +1,4 @@
-import logging
+import logging  # noqa
 
 import faust
 from ..common import app
@@ -11,5 +11,6 @@ async def email_agent(tweets: faust.Stream[Tweet]) -> None:
         tweet = inst.content
         text = (tweet.get('extended_tweet', {}).get('full_text') or  # noqa
                 tweet.get('text'))
-        logging.warning('got tweet %s', text)
-        yield Content(text=text)
+        # logging.warning('got tweet %r', text)
+        if text:
+            yield Content(text=text)
